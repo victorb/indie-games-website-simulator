@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Indie Games Website Simulator">
+    <meta property="og:description" content="What if it was the year 2012 again?">
+    <title>Indie Games Website Simulator</title>
+    <style>
+      html, body {
+        overflow: hidden;
+        background-color: rgb(67, 138, 251);
+        font-family: monospace;
+        color: white;
+      }
+      #wrapper {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #game-canvas {
+        /*border: 3px solid white;*/
+        max-width: 98vw;
+        min-width: 640px;
+        max-height: 98vw;
+        outline: none;
+        z-index: 1;
+      }
+      @font-face {
+          font-family: 'HelloBlueprint';
+          src: url('assets/fonts/Titles-HelloBlueprint.ttf') format('truetype');
+      }
+      #loading {
+        font-family: HelloBlueprint;
+        position: absolute;
+        z-index: 0;
+        font-size: 5em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="loading">Booting...</div>
+      <canvas id="game-canvas"></canvas>
+    </div>
+  <script type="module">
+    import init from './wasm/indie-games-website-simulator.js'
+
+    init().catch((error) => {
+      if (!error.message.startsWith("Using exceptions for control flow, don't mind me. This isn't actually an error!")) {
+        throw error;
+      }
+    });
+  </script>
+</body>
+</html>
